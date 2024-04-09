@@ -1,17 +1,20 @@
 name: remote ssh command
 on: [push]
 jobs:
-  build:
-    name: Build
+  deploy:
+    name: deploy
     runs-on: ubuntu-latest
     steps:
-    - name: executing remote ssh commands using password
+    - name: pull and deploy next.js
       uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
+        key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          whoami
-          ls -la
+          cd /home/ubuntu/projects/demo-nextjs-on-vps
+          git pull
+          npm install
+          npm run build
+          pm2 start npm --name nextjs -- start
