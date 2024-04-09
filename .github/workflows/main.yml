@@ -15,7 +15,6 @@ jobs:
         script: |
           cd /home/ubuntu/projects/demo-nextjs-on-vps
           git pull
-          nvm use v20.12.1
           npm install
           npm run build
           pm2 start npm --name nextjs -- start
