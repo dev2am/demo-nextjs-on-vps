@@ -17,5 +17,6 @@ jobs:
           git pull
           npm install
           npm run build
-          pm2 delete app
-          pm2 start npm --name app -- start
+          pm2 delete all
+          pm2 start ecosystem.config.js -i max
+          pm2 list
