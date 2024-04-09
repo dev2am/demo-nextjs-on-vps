@@ -1,4 +1,4 @@
-name: remote ssh command
+name: Deploy Next.js to VPS
 on: [push]
 jobs:
   deploy:
@@ -17,4 +17,5 @@ jobs:
           git pull
           npm install
           npm run build
-          pm2 start npm --name nextjs -- start
+          pm2 delete app
+          pm2 start npm --name app -- start
